@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+  <file src="src/AuthService.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Contracts/IAuthService.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[generateAccessToken]]></code>
+      <code><![CDATA[refreshAccessToken]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Entities/Request.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$accessToken]]></code>
+      <code><![CDATA[$expiresAt]]></code>
+      <code><![CDATA[$refreshToken]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Providers/ServiceProvider.php">
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[$this->app]]></code>
+    </UndefinedInterfaceMethod>
+    <UnusedClass>
+      <code><![CDATA[ServiceProvider]]></code>
+    </UnusedClass>
+  </file>
+</files>
