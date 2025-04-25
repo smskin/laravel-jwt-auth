@@ -2,14 +2,14 @@
 
 namespace SMSkin\JwtAuth\Providers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use SMSkin\JwtAuth\AuthService;
 use SMSkin\JwtAuth\Contracts\IAuthService;
 use SMSkin\JwtAuth\Contracts\IRefreshTokenStorage;
 use SMSkin\JwtAuth\JwtGuard;
 use SMSkin\JwtAuth\Support\Crypto;
 use SMSkin\JwtAuth\Support\RefreshTokenStorage;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Foundation\Application;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {

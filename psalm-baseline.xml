@@ -20,7 +20,8 @@
   </file>
   <file src="src/Providers/ServiceProvider.php">
     <UndefinedInterfaceMethod>
-      <code><![CDATA[$this->app]]></code>
+      <code><![CDATA[$app]]></code>
+      <code><![CDATA[$app]]></code>
     </UndefinedInterfaceMethod>
     <UnusedClass>
       <code><![CDATA[ServiceProvider]]></code>
