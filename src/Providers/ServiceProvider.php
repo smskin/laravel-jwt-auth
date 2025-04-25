@@ -33,7 +33,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             return new JwtGuard(
                 $app['auth']->createUserProvider($config['provider']),
                 $app['request'],
-                $app->make(Crypto::class)
+                $app->make(IAuthService::class)
             );
         });
     }

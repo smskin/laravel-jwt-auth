@@ -8,11 +8,11 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Traits\Macroable;
+use SMSkin\JwtAuth\Contracts\IAuthService;
 use SMSkin\JwtAuth\Entities\Jwt;
 use SMSkin\JwtAuth\Exceptions\ExpiredToken;
 use SMSkin\JwtAuth\Exceptions\FutureToken;
 use SMSkin\JwtAuth\Exceptions\InvalidSignature;
-use SMSkin\JwtAuth\Support\Crypto;
 
 class JwtGuard implements Guard
 {
@@ -22,7 +22,7 @@ class JwtGuard implements Guard
     public function __construct(
         UserProvider $provider,
         private readonly Request $request,
-        private readonly Crypto $crypto
+        private readonly IAuthService $authService
     ) {
         $this->provider = $provider;
     }
@@ -44,7 +44,7 @@ class JwtGuard implements Guard
 
         $jwt = Jwt::decode($token);
         try {
-            $this->verifyToken($jwt);
+            $this->authService->validateAccessToken($jwt);
         } catch (ExpiredToken|FutureToken|InvalidSignature) {
             return null;
         }
@@ -70,27 +70,5 @@ class JwtGuard implements Guard
             return true;
         }
         return false;
-    }
-
-    /**
-     * @throws InvalidSignature
-     * @throws FutureToken
-     * @throws ExpiredToken
-     */
-    private function verifyToken(Jwt $token): void
-    {
-        $this->crypto->verify(
-            $token->header->algorithm,
-            $token->header->getSource() . '.' . $token->payload->getSource(),
-            $token->getCrc()
-        );
-
-        if ($token->payload->nbf !== null && time() < $token->payload->nbf) {
-            throw new FutureToken();
-        }
-
-        if ($token->payload->exp !== null && time() > $token->payload->exp) {
-            throw new ExpiredToken();
-        }
     }
 }
