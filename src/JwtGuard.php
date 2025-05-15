@@ -29,7 +29,6 @@ class JwtGuard implements Guard
 
     /**
      * @throws Exceptions\UnsupportedCryptAlgorithm
-     * @throws Exceptions\InvalidTokenStructure
      */
     public function user(): Authenticatable|null
     {
@@ -42,7 +41,12 @@ class JwtGuard implements Guard
             return null;
         }
 
-        $jwt = Jwt::decode($token);
+        try {
+            $jwt = Jwt::decode($token);
+        } catch (Exceptions\InvalidTokenStructure) {
+            return null;
+        }
+
         try {
             $this->authService->validateAccessToken($jwt);
         } catch (ExpiredToken|FutureToken|InvalidSignature) {
