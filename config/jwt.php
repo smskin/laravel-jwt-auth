@@ -6,8 +6,5 @@ return [
     ],
     'access_token' => [
         'lifetime' => 5, // in minutes
-    ],
-    'refresh_token' => [
-        'lifetime' => 30, // in minutes
-    ],
+    ]
 ];

@@ -17,7 +17,7 @@ class RefreshTokenStorage implements IRefreshTokenStorage
 
     public function create(IJwtUser $user, string $refreshToken): void
     {
-        Cache::put($this->getCacheKey($refreshToken), $user->getAuthIdentifier(), now()->addMinutes(config('jwt.refresh_token.lifetime')));
+        Cache::put($this->getCacheKey($refreshToken), $user->getAuthIdentifier(), now()->addMonth());
     }
 
     public function delete(IJwtUser $user, string $refreshToken): void
